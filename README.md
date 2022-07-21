@@ -1,7 +1,36 @@
 # Load CNAB file
 
-This application parses and loads a file in the CNAB (Centro Nacional de Automacao Bancaria) format. The parsed data can be retrieved via RESTful API.
+This application parses and loads a file in CNAB (Centro Nacional de Automacao Bancaria) format. The file contains financial transactions from various shops. An example can be found [here](CNAB.txt). 
+  
+The parsed data can be retrieved via RESTful API.  
+  
+## CNAB file format
 
+| Field description | Start | End | Size | Comment
+| ----------------- | ------------- | -----| ---- | ------
+| Type  | 1  | 1 | 1 | Transaction type
+| Date  | 2  | 9 | 8 | Transaction date
+| Value | 10 | 19 | 10 | Transaction value. *Obs.* The value must be divided by 100 (value / 100.00) to normalised
+| CPF | 20 | 30 | 11 | Fiscal identification number
+| Card number | 31 | 42 | 12 | Card utilised 
+| Hour  | 43 | 48 | 6 | Transaction (UTC-3 timezone)
+| Shop owner | 49 | 62 | 14 | Shop's representative name
+| Shop name | 63 | 81 | 19 | Shop name  
+  
+## Transaction types
+
+| Type | Description | Cash flow | Signal |
+| ---- | -------- | --------- | ----- |
+| 1 | Debit | Inbound | + |
+| 2 | Boleto | Outbound | - |
+| 3 | Financing | Outbound | - |
+| 4 | Credit | Inbound | + |
+| 5 | Loan Receiving | Inbound | + |
+| 6 | Sales | Inbound | + |
+| 7 | TED Receiving | Inbound | + |
+| 8 | DOC Receiving | Inbound | + |
+| 9 | Rental | Outbound | - |  
+  
 ## Architecture
 The application is organised as per the **Clean Architecture** pattern, with the services in the `usecase` package and the `controller` and `persistence` layers living in their own packages under the `adapter` package. I haven't felt the need to create any *domain objects* so far but, in the future, they should live in the `domain` package and have no reference to other objects. Only use cases will be allowed to reference them as dependencies must only point inwards (**the dependency rule**).  
   
