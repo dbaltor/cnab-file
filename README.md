@@ -72,13 +72,13 @@ With the application running, point your browser at `http://localhost:8080/swagg
   mvn package
   java -jar target/cnab-app-1.0-SNAPSHOT.jar
   ```
-  The application will be available at the port **8080**.  
+  The application will be available at `localhost:8080`  
     
-  You can select the `CNAB.txt` file in the project root folder and click on the `Upload` button. The file content will be parsed and stored on the in-memory database. A successful message should appear at the top of the home page.  
+  You can select the `CNAB.txt` file in the project root folder and click on the **Upload** button. The file content will be parsed and stored on the in-memory database. A successful message should appear at the top of the home page.  
     
-  You can inspect the in-memory database pointing your browser at `localhost:8080/h2`.  
+  You can inspect the in-memory database pointing your browser at `localhost:8080/h2`. Make sure the **JDBC URL** field contains `jdbc:h2:mem:database`. Click on the **Connect** button.  
     
-  You can retrieve the list of transactions with their balance per shop calling the  `localhost:8080/cnab/v1/operations` HTTP GET endpoint. 
+  You can retrieve the list of transactions with their balance per shop calling the  `localhost:8080/cnab/v1/operations` HTTP GET endpoint.  
 
   
 - To build and run both the application and MySQL containers, go to the *project root* folder and enter:  
