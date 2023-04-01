@@ -88,9 +88,9 @@ With the application running, point your browser at `http://localhost:8080/swagg
   The makefile will start a Maven container to build the application container using **multi-stage building** so that the final app container does not contain building tools. It will then spin up two containers: *app* and *database*. The application is going to connect to the MySQL database this time.  
   To verify the containers running, type `docker ps`
     
-  The application will be available at the port **8080** again.  
+  The application will be available at `localhost:8080` again.  
   
-  The MySQL database running in its container can be accessed through the user *user* with password *password*. For example, if you have MySQL client installed on your machine, use:  
+  The MySQL database running in its container can be accessed through the *user* user with *password* password. For example, if you have MySQL client installed on your machine, use:  
   `mysql -u user -ppassword -h 127.0.0.1 database`
 
 - To shut down both containers, go to the *project root* folder and enter:  
